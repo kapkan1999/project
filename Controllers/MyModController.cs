@@ -10,7 +10,7 @@ namespace LAB.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LabController : ControllerBase
+    public class MyModController : ControllerBase
     {
         private static IStorage<MyModData> _memCache = new MemCache();
 

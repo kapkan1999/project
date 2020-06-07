@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <Version>0.0.2-rc.1</Version>
-    <Authors>P.Puchkov - M.Kaigorogov - M. Terehi</Authors>
+    <Version>0.0.3-rc.1</Version>
+    <Authors>P.Puchkov - M.Kaigorogov - M. Terehin</Authors>
     <Company>Onefive Company</Company>
     <Product>Project 2</Product>
     <PackageId>MyApp</PackageId>
