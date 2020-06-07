@@ -4,6 +4,7 @@ namespace LAB.Models
 { 
     public class MyModData 
     { 
+        public Guid Id { get; set; } = Guid.Empty;
         public string id_spare { get; set; } 
         public string name { get; set; } 
         public double price { get; set; } 
