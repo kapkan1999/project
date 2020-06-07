@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using LAB.Models;
+using LAB.Storage;
 
 namespace LAB
 {
@@ -23,11 +25,22 @@ namespace LAB
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-        }
-
+         public void ConfigureServices(IServiceCollection services)
+       {
+           services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+           switch (Configuration["Storage:Type"].ToStorageEnum())
+           {
+               case StorageEnum.MemCache:
+                   services.AddSingleton<IStorage<MyModData>, MemCache>();
+                   break;
+               case StorageEnum.FileStorage:
+                   services.AddSingleton<IStorage<MyModData>>(
+                       x => new FileStorage(Configuration["Storage:FileStorage:Filename"], int.Parse(Configuration["Storage:FileStorage:FlushPeriod"])));
+                   break;
+               default:
+                   throw new IndexOutOfRangeException($"Storage type '{Configuration["Storage:Type"]}' is unknown");
+           }
+       }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
