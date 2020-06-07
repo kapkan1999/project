@@ -4,25 +4,26 @@ using System.Net;
 using System.Net.Http;
 using Microsoft.AspNetCore.Mvc;
 using LAB.Models;
+using LAB.Storage;
 
 namespace LAB.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MyModController : ControllerBase
+    public class LabController : ControllerBase
     {
-        private static List<MyModData> _memCache = new List<MyModData>();
+        private static IStorage<MyModData> _memCache = new MemCache();
 
         [HttpGet]
         public ActionResult<IEnumerable<MyModData>> Get()
         {
-            return Ok(_memCache);
+            return Ok(_memCache.All);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<MyModData> Get(int id)
+        public ActionResult<MyModData> Get(Guid id)
         {
-            if (_memCache.Count <= id) return NotFound("No such");
+            if (!_memCache.Has(id)) return NotFound("No such");
 
             return Ok(_memCache[id]);
         }
@@ -40,9 +41,9 @@ namespace LAB.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] MyModData value)
+        public IActionResult Put(Guid id, [FromBody] MyModData value)
         {
-            if (_memCache.Count <= id) return NotFound("No such");
+            if (!_memCache.Has(id)) return NotFound("No such");
 
             var validationResult = value.Validate();
 
@@ -55,9 +56,9 @@ namespace LAB.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid id)
         {
-            if (_memCache.Count <= id) return NotFound("No such");
+            if (!_memCache.Has(id)) return NotFound("No such");
 
             var valueToRemove = _memCache[id];
             _memCache.RemoveAt(id);
