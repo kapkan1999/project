@@ -19,9 +19,9 @@ namespace LAB
     public class Startup
     {
         public Startup(IConfiguration configuration)
-        {   Log.Information("Information in IConfiguration:");
-            Log.Warning("Some warning in IConfiguration");
-            Log.Error("Here comes an error in IConfiguration");
+        {   Log.Information("Information in Startup:");
+            Log.Warning("Some warning in Startup");
+            Log.Error("Here comes an error in Startup");
             Configuration = configuration;
         }
 
@@ -76,7 +76,7 @@ namespace LAB
                 .WriteTo.Console()
                 .WriteTo.File("logs\\LAB.log", rollingInterval: RollingInterval.Day)
                 .CreateLogger();                
-            Log.Logger = log;
+                Log.Logger = log;
                 //Log.Information($"RollingInterval {}");
                 Log.Debug($"Full log info: {@log}");
         }
