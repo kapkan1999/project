@@ -15,8 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    
-    </PackageReference>
+     
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Serilog" Version="2.10.0" />
