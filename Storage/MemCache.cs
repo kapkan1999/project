@@ -9,6 +9,7 @@ namespace LAB.Storage
     {
         private object _sync = new object();
         private List<MyModData> _memCache = new List<MyModData>();
+        public string StorageType => $"{nameof(MemCache)}";
         public MyModData this[Guid id] 
         { 
             get
@@ -59,6 +60,6 @@ namespace LAB.Storage
                 _memCache.RemoveAll(x => x.Id == id);
             }
         }
-        public string StorageType => $"{nameof(MemCache)}";
+        
     }
 }

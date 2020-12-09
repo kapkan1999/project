@@ -1,12 +1,16 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using LAB.Models;
 
 namespace LAB.Storage
 {
     public class StorageService
     {
-        private readonly IStorage<LabData> _storage;
+        private readonly IStorage<MyModData> _storage;
 
-        public StorageService(IStorage<LabData> storage)
+        public StorageService(IStorage<MyModData> storage)
         {
             _storage = storage;
         }
