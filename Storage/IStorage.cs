@@ -10,5 +10,6 @@ namespace LAB.Storage
         void Add(T value);
         void RemoveAt(Guid id);
         bool Has(Guid id);
+        string StorageType { get; }
     }
 }
